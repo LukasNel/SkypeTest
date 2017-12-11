@@ -2,25 +2,55 @@
     {% block title %}
         Hello World!
     {% endblock %}
+    {% block scripts %}
+        <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
 
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+              showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) {slideIndex = 1}
+                  if (n < 1) {slideIndex = slides.length}
+                  for (i = 0; i < slides.length; i++) {
+                      slides[i].style.display = "none";
+                  }
+                  for (i = 0; i < dots.length; i++) {
+                      dots[i].className = dots[i].className.replace(" active", "");
+                  }
+
+                  slides[slideIndex-1].style.display = "block";
+                  dots[slideIndex-1].className += " active";
+            }
+        </script>
+    {% endblock %}
     {% block content %}
         <div class="container">
             <div class="row">
-                <div class="col-sm">
-                    <section id = "slideshow_section">
-                        <div class="mySlides fade">
+                <div class="col-lg">
+                    <div id = "slideshow_section">
+                        <div class="mySlides">
                             <div class="numbertext">1 / 3</div>
                             <img src="static/img1.jpg" style="width:100%">
                             <div class="text">Caption Text</div>
                         </div>
 
-                        <div class="mySlides fade">
+                        <div class="mySlides">
                             <div class="numbertext">2 / 3</div>
                             <img src="static/img2.jpg" style="width:100%">
                             <div class="text">Caption Two</div>
                         </div>
 
-                        <div class="mySlides fade">
+                        <div class="mySlides">
                             <div class="numbertext">3 / 3</div>
                             <img src="static/img3.jpg" style="width:100%">
                             <div class="text">Caption Three</div>
@@ -28,52 +58,54 @@
 
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    </section>
+                    </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-10">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-sm" style = "border-bottom: 1px gray solid;">
+                        <div class="row" id = "newsheader">
+                            <div class="col-md" >
                                 <h1>Latest news</h1>
                             </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-sm">
-                                <ul>
-                                    <li>News Item</li>
-                                    <li>News Item</li>
-                                    <li>News Item</li>
-                                    <li>News Item</li>
-                                    <li>News Item</li>
-                                </ul>
+                            <div class="col-md" >
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
                             </div>
-                            <div class="col-sm">
+                            <div class="col-md">
                                 sdss
                             </div>
-                            <div class="col-sm">
+                            <div class="col-md">
                                 ssdsd
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <aside id = "xsidebar">
-                        <ul>
-                            <li>                 nav links.                </li>
-                            <li>                 nav links.                </li>
-                            <li>                 nav links.                </li>
-                            <li>                 nav links.                </li>
-                            <li>                 nav links.                 </li>
-                        </ul>
+
+                <div class="col-2">
+                    <aside id = "newssummary">
+                        <header>
+                            <h1 id = "newssummaryheader">{% now "d" %}</h1>
+                            <p id = "newssummarysubtitle">{% now "N" %} {% now "Y" %}</p>
+
+                        </header>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
+                                    <p>News Item</p>
                     </aside>
                 </div>
             </div>
         </div>
-
+        <!--
         <section id = "main_section">
              <h1>This is the best webpage ever developed</h1>
             <p>Firstly: There's nothing like a good wank.</p>
@@ -87,6 +119,6 @@
                 <li>                 nav links.                 </li>
             </ul>
         </aside>
-
+        -->
     {% endblock %}
 
