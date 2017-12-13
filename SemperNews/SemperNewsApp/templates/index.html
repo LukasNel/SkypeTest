@@ -67,9 +67,8 @@
                         <div class="container">
 
                             <div class="row" id = "newsheader">
-                                <div class="col-md-12">
-                                    <h1 style="display:inline;text-align:left;">Latest news of </h1>
-                                    <h1 style="display:inline;text-align:left;"class="align-bottom">{% now "d" %} {% now "N" %} {% now "Y" %}</h1>
+                                <div class="col-md">
+                                    <h1>Latest news </h1>
 
                                 </div>
 
@@ -99,11 +98,11 @@
 
                     <div class="col-2">
                         <aside id = "newssummary">
-                           <!-- <header>
+                          <header>
                                 <h1 id = "newssummaryheader">{% now "d" %}</h1>
-                                <p id = "newssummarysubtitle">{% now "N" %} {% now "Y" %}</p>
+                                <p id = "newssummarysubtitle">{% now "M" %} {% now "Y" %}</p>
 
-                            </header>-->
+                            </header>
                             <ul id = "newssummarylist">
                                         {% for newsItem in newsItems %}
                                             <li>
