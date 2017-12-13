@@ -74,7 +74,7 @@ body {
     padding-left:7px;
 }
 #newssummarylist li span{
-    color:cyan;
+    color:#C4D8F2;
     font-weight:500;
     font-size:13px;
 }
@@ -161,7 +161,7 @@ figcaption {
 }
 #newssummaryheader {
     font: bold  80px verdana,sans-serif;/*85*/
-    color: red;
+    color:  rgba(210, 32, 16);;
     text-align:center;
     display:inline;
     padding-top: 15px;
