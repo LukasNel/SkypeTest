@@ -1,12 +1,14 @@
 from django.db import models
 
 # Create your models here.
-class newsItem(models.Model):
+class NewsItem(models.Model):
     title = models.CharField(max_length=255)
     type = models.CharField(max_length=30)
     article = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    thumbnail = models.ImageField(upload_to='static/img',
-                               blank=True,
-                               null=True)
+    thumbnail_path = models.CharField(max_length=255,default='' )
+    timeDiff = ''
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.title + " of type " + self.type;
