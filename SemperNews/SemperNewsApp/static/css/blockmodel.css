@@ -4,7 +4,7 @@
 }
 #main_title {
     color: gold;
-    font: bold 45px verdana,sans-serif
+    font: bold 70px sabon;
 }
 h1 {
     font: bold 20px verdana,sans-serif
@@ -44,7 +44,8 @@ body {
 #main_menu {
     background: #CCCCCC;
     padding:5px 15px;
-    
+    border-bottom:rgba(128,128,128,0.5) 1px solid;
+    border-top:#808080 1px solid;
     
 }
 #main_menu ul {
@@ -117,7 +118,7 @@ time {
     color: #999999;
 }
 figcaption {
-    font: italic 14px verdana,sans-serif;
+    font: italic 14px sabon,sans-serif;
 }
 #slideshow_section{
   max-width: 1000px;
@@ -132,7 +133,10 @@ figcaption {
     border-top: 2px black solid;*/
 }
 #newsheader h1{
-    font: normal 50px verdana,sans-serif;
+    font: normal 50px sabon;
+    line-height:100%;
+    margin-top:1px;
+    font-weight:100;
 }
 #newssummary{
     margin-top: 27px;
@@ -161,7 +165,7 @@ figcaption {
 }
 #newssummaryheader {
     font: bold  80px verdana,sans-serif;/*85*/
-    color:  rgba(210, 32, 16);;
+    color:  rgba(210, 32, 16);
     text-align:center;
     display:inline;
     padding-top: 15px;

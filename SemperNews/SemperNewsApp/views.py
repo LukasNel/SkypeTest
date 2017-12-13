@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def indexPage(request):
-    newsItems = NewsItem.objects.all().order_by('-created_at')[:5]
+    newsItems = NewsItem.objects.all().order_by('-created_at')[:20]
     for i in range(len(newsItems)):
         td = timezone.now() - newsItems[i].created_at
         if td.days > 0:

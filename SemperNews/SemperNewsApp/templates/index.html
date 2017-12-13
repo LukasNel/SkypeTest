@@ -35,89 +35,105 @@
     {% endblock %}
     {% block content %}
         <section id = "main_page">
-            <div class="container">
+             <div class="container">
                 <div class="row">
-                    <div class="col-lg">
-                        <div id = "slideshow_section">
-                            <div class="mySlides">
-                                <div class="numbertext">1 / 3</div>
-                                <img src="static/img1.jpg" style="width:100%">
-                                <div class="text">Caption Text</div>
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">2 / 3</div>
-                                <img src="static/img2.jpg" style="width:100%">
-                                <div class="text">Caption Two</div>
-                            </div>
-
-                            <div class="mySlides">
-                                <div class="numbertext">3 / 3</div>
-                                <img src="static/img3.jpg" style="width:100%">
-                                <div class="text">Caption Three</div>
-                            </div>
-
-                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-10">
+                    <div class="col">
                         <div class="container">
-
-                            <div class="row" id = "newsheader">
-                                <div class="col-md">
-                                    <h1>Latest news </h1>
-
-                                </div>
-
-                            </div>
-
                             <div class="row">
-                                <div class="col-md" >
-                                     <ul id = "newssummarycol1">
-                                     </ul>
-                                        <p>News Item</p>
-                                        <p>News Item</p>
-                                        <p>News Item</p>
-                                        <p>News Item</p>
-                                        <p>News Item</p>
+                                <div class="col-lg">
+                                    <div id = "slideshow_section">
+                                        <div class="mySlides">
+                                            <div class="numbertext">1 / 3</div>
+                                            <img src="static/img1.jpg" style="width:100%">
+                                            <div class="text">Caption Text</div>
+                                        </div>
 
+                                        <div class="mySlides">
+                                            <div class="numbertext">2 / 3</div>
+                                            <img src="static/img2.jpg" style="width:100%">
+                                            <div class="text">Caption Two</div>
+                                        </div>
+
+                                        <div class="mySlides">
+                                            <div class="numbertext">3 / 3</div>
+                                            <img src="static/img3.jpg" style="width:100%">
+                                            <div class="text">Caption Three</div>
+                                        </div>
+
+                                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                    </div>
                                 </div>
-                                <div class="col-md">
-                                    sdss
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="container">
+
+                                        <div class="row" id = "newsheader">
+                                            <div class="col-md">
+                                                <h1>LATEST NEWS </h1>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5" >
+                                                <p id = "newssummarycol1header">
+
+                                                </p>
+                                                 <ul id = "newssummarycol1" style="list-style:none">
+                                                     <li>
+
+                                                         {% for newsItem in newsItems|slice:"1:10" %}
+                                                            <li>
+                                                                <span>{{ newsItem.type | upper }}</span><br/>
+                                                                <b>{{ newsItem.title }}</b><br/>
+                                                                <em>Posted {{ newsItem.timeDiff }} ago. </em><br/>
+                                                            </li>
+                                                        {% endfor %}
+                                                     </li>
+                                                 </ul>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                sdss
+                                            </div>
+                                            <div class="col-md-3">
+                                                ssdsd
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md">
-                                    ssdsd
-                                </div>
+
 
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-2">
-                        <aside id = "newssummary">
-                          <header>
-                                <h1 id = "newssummaryheader">{% now "d" %}</h1>
-                                <p id = "newssummarysubtitle">{% now "M" %} {% now "Y" %}</p>
-
-                            </header>
-                            <ul id = "newssummarylist">
-                                        {% for newsItem in newsItems %}
-                                            <li>
-                                                <span>{{ newsItem.type | upper }}</span><br/>
-                                                <b>{{ newsItem.title }}</b><br/>
-                                                <em>Posted {{ newsItem.timeDiff }} ago. </em><br/>
-                                            </li>
-                                        {% endfor %}
-                                        <li style="border:none;margin-top:12px;"></li>
-                            </ul>
-
-                        </aside>
-                    </div>
                 </div>
-            </div>
+                    <div class="col-2">
+                                    <aside id = "newssummary">
+                                      <header>
+                                            <h1 id = "newssummaryheader">{% now "d" %}</h1>
+                                            <p id = "newssummarysubtitle">{% now "M" %} {% now "Y" %}</p>
+
+                                        </header>
+                                        <ul id = "newssummarylist">
+                                                    {% for newsItem in newsItems %}
+                                                        <li>
+                                                            <span>{{ newsItem.type | upper }}</span><br/>
+                                                            <b>{{ newsItem.title }}</b><br/>
+                                                            <em>Posted {{ newsItem.timeDiff }} ago. </em><br/>
+                                                        </li>
+                                                    {% endfor %}
+                                                    <li style="border:none;margin-top:12px;"></li>
+                                        </ul>
+
+                                    </aside>
+                                </div>
+               </div>
+
+             </div>
         </section>
         <!--
         <section id = "main_section">
