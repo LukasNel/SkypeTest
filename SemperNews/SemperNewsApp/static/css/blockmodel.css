@@ -67,6 +67,9 @@ body {
     margin-bottom:0px;
 }
 #newssummarylist li{
+   list-style:none;
+}
+.newssummarylistitem {
     border-top: rgba(196, 216, 226,0.6) 1px solid;
     list-style:none;
     text-align:left;
@@ -74,16 +77,16 @@ body {
     
     padding-left:7px;
 }
-#newssummarylist li span{
+.newssummarylistitem  span{
     color:#C4D8F2;
     font-weight:500;
     font-size:13px;
 }
-#newssummarylist li em{
+.newssummarylistitem  em{
     color:gray;
     font-size:11px;
 }
-#newssummarylist li .newssumarylisttitle{
+.newssummarylistitem  .newssumarylisttitle{
     font-weight: bold;
     
 }
