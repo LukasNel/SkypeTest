@@ -20,20 +20,36 @@ body {
     
     
 }
+.affix {
+  top: 0;
+}
+
+.affix-top {
+}
+
+.affix-bottom {
+  position: absolute;
+}
+
+
 #main_page{
-     font-size:12px;
+        position:relative;
+        top:113px;
+        font-size:12px;
+        background-color:white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #main_body{
     background-color:#FFFAFA;
 }
 #wrapper{ 
-    background-color:white;
+    
     width: 56%;
     max-width:1060px;
     height: 100%;
     margin: 15px auto;
     text-align:left;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
 }
 
 #main_header{

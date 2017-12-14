@@ -34,10 +34,6 @@
         </script>
     {% endblock %}
     {% block content %}
-        <section id = "main_page">
-            <div class="container">
-                <div class="row">
-                    <div class="col-10">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg">
@@ -106,30 +102,6 @@
 
                             </div>
                         </div>
-                   </div>
-                    <div class="col-2">
-                                    <aside id = "newssummary">
-                                      <header>
-                                            <h1 id = "newssummaryheader">{% now "d" %}</h1>
-                                            <p id = "newssummarysubtitle">{% now "M" %} {% now "Y" %}</p>
-
-                                        </header>
-                                        <ul id = "newssummarylist">
-                                                    {% for newsItem in newsItems|slice:"0:5" %}
-                                                        <li class="newssummarylistitem">
-                                                            <span>{{ newsItem.type | upper }}</span><br/>
-                                                            <b>{{ newsItem.title }}</b><br/>
-                                                            <em>Posted {{ newsItem.timeDiff }} ago. </em><br/>
-                                                        </li>
-                                                    {% endfor %}
-                                                    <li style="border:none;margin-top:12px;"></li>
-                                        </ul>
-
-                                    </aside>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!--
         <section id = "main_section">
              <h1>This is the best webpage ever developed</h1>
@@ -146,4 +118,3 @@
         </aside>
         -->
     {% endblock %}
-
