@@ -11,4 +11,14 @@ class NewsItem(models.Model):
     timeDiff = ''
 
     def __str__(self):              # __unicode__ on Python 2
-        return self.title + " of type " + self.type;
+        return self.title + " of type " + self.type
+
+
+
+class FeaturedItem(models.Model):
+    newsItem = models.OneToOneField(NewsItem,  primary_key=True,)
+    subtext = models.CharField(max_length=511)
+    thumbnail_path = models.CharField(max_length=255,default='' )
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.newsItem.title + " of type " + self.newsItem.type
