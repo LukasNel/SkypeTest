@@ -19,13 +19,22 @@
     <script src='{% static "js/scrollspy.js" %}'></script>
     <link rel="stylesheet" href='{% static "css/blockmodel.css" %}'/>
 </head>
-<body id="main_body">
+<body id="main_body" style='background:url({% static "img/prg-fb.jpg" %}) no-repeat; background-size:100% ;width: 100%; height: 100%;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;'>
+
 <div id="wrapper">
     <div class="container-fluid" id="main_page">
         <div class="row">
             <div class="col-12" id="menuwrapper">
 
                 <header id="main_header">
+                    <img src="{% static "img/prg-fb.jpg" %}" style='width:100%;height:4em;position;opacity:0.2;'/>
                     <a href="{% url 'index' %}">
                         <h1 id="main_title">Semper Concipio</h1>
                     </a>
