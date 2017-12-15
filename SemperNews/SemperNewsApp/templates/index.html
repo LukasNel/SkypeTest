@@ -34,6 +34,7 @@ Hello World!
             }
 
 
+
 </script>
 {% endblock %}
 {% block content %}
@@ -70,7 +71,6 @@ Hello World!
 <div class="row" style="padding-left:0px;">
     <div class="col-12">
         <div class="container">
-
             <div class="row" id="newsheader">
                 <div class="col-md">
                     <h1>LATEST NEWS </h1>
@@ -80,26 +80,31 @@ Hello World!
 
             <div class="row">
                 <div class="col-md-4">
-                    <div id="newssummarycol1header">
-                        <div style="display:inline;height:10em;width:45%;float:left">
-                            <img src="{{ newsItem.0.thumbnail_path }}"
-                                 class="img-fluid img-thumbnail"
-                                 style="height: 100%; width: 100%;"/>
-                        </div>
-                        <div class="newssummarylistitem" style="display:inline;width:50%;margin-left:5px;float:left">
-                            <span>{{ newsItems.0.type | upper }}</span><br/>
-                            <b>{{ newsItems.0.title }}</b><br/>
-                            <em>Posted {{ newsItems.0.timeDiff }} ago. </em><br/>
-                        </div>
-                        <br style="clear:both;"/>
-                    </div>
+                    {% with newsHeader=newsItems.0 %}
+                        <a href="{% url 'article' newsHeader.id %}">
+                            <div id="newssummarycol1header">
+                                <div style="display:inline;height:10em;width:45%;float:left">
+                                    <img src="{{ newsItem.0.thumbnail_path }}"
+                                         class="img-fluid img-thumbnail"
+                                         style="height: 100%; width: 100%;"/>
+                                </div>
+                                <div class="newssummarylistitem" style="display:inline;width:50%;margin-left:5px;float:left">
+                                    <span>{{ newsHeader.type | upper }}</span><br/>
+                                    <b>{{ newsHeader.title }}</b><br/>
+                                    <em>Posted {{ newsHeader.timeDiff }} ago. </em><br/>
+                                </div>
+                                <br style="clear:both;"/>
+                            </div>
+                        </a>
+                    {% endwith %}
                     <ul id="newssummarycol1" style="list-style:none;display:block;">
 
                         {% for newsItem in newsItems|slice:"1:5" %}
-                        <li style="display:block;">
 
+                        <li style="display:block;">
+                            <a href="{% url 'article' newsItem.id %}">
                             <div style="display:inline;height:6em;width:25%;float:left">
-                                <img src="{{ newsItem.thumbnail_path }}"
+                                <img src="{% static newsItem.thumbnail_path %}"
                                      class="img-fluid img-thumbnail"
                                      style="height: 100%; width: 100%;"/>
                             </div>
@@ -108,38 +113,46 @@ Hello World!
                                 <em>Posted {{ newsItem.timeDiff }} ago. </em>
                             </div>
                             <br style="clear:both;"/>
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <div class="newssummarylistitem">
-                        {% with featuredItem=featuredItems.0 %}
-                        <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
-                            <img src="{{ featuredItem.thumbnail_path }}" class="img-fluid img-thumbnail"
-                                 style="height: 100%; width: 100%;"/>
-                             </div>
+                    {% with featuredItem=featuredItems.0 %}
+                    <a href="{% url 'article' featuredItem.newsItem.id %}">
+                        <div class="newssummarylistitem">
+
+                            <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
+                                <img src="{% static featuredItem.thumbnail_path %}" class="img-fluid img-thumbnail"
+                                     style="height: 100%; width: 100%;"/>
+                            </div>
                             <span>{{ featuredItem.newsItem.type | upper }}</span><br/>
                             <b style="font-size:14px">{{ featuredItem.newsItem.title }}</b><br/>
                             <em style="font-weight:bold">{{ featuredItem.subtext }} </em><br/>
 
-                        {% endwith %}
-                    </div>
+
+                        </div>
+                    </a>
+                    {% endwith %}
                 </div>
                 <div class="col-md-4">
-                    <div class="newssummarylistitem">
-                        {% with featuredItem=featuredItems.1 %}
-                        <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
-                            <img src="{{ featuredItem.thumbnail_path }}" class="img-fluid img-thumbnail"
-                                 style="height: 100%; width: 100%;"/>
-                             </div>
+                    {% with featuredItem=featuredItems.1 %}
+                    <a href="{% url 'article' featuredItem.newsItem.id %}">
+                        <div class="newssummarylistitem">
+
+                            <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
+                                <img src="{% static featuredItem.thumbnail_path %}" class="img-fluid img-thumbnail"
+                                     style="height: 100%; width: 100%;"/>
+                            </div>
                             <span>{{ featuredItem.newsItem.type | upper }}</span><br/>
                             <b style="font-size:14px">{{ featuredItem.newsItem.title }}</b><br/>
                             <em style="font-weight:bold">{{ featuredItem.subtext }} </em><br/>
 
-                        {% endwith %}
-                    </div>
-                </div>
+
+                        </div>
+                    </a>
+                    {% endwith %}
 
             </div>
         </div>
@@ -147,6 +160,7 @@ Hello World!
 
 
 </div>
+    </div>
 
 <!--
 <section id = "main_section">

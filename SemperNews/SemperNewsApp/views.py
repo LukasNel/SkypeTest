@@ -38,9 +38,12 @@ def indexPage(request):
                                           'newsItems' : newsItems,
                                           'featuredItems' : featuredItems})
 
+
 def article(request,fid):
-    newsItems = NewsItem.objects.all().order_by('-created_at')[:20]
-    article = NewsItem.objects.filter(pk=fid)
+    newsItems = NewsItem.objects.order_by('-created_at')[:20]
+
+    articleitem = NewsItem.objects.filter(pk=fid)[0]
+    articleparagraphs = articleitem.article.split('\n')
     for i in range(len(newsItems)):
         td = timezone.now() - newsItems[i].created_at
         if td.days > 0:
@@ -63,8 +66,9 @@ def article(request,fid):
                 newsItems[i].timeDiff = str(td.seconds) + " second"
             else:
                 newsItems[i].timeDiff = str(td.seconds) + " seconds"
-
     return render(request, 'article.html', {'currentDay' : timezone.now().strftime("%m"),
                                           'currentMonth' : timezone.now().strftime("%m"),
                                           'currentYear' : timezone.now().strftime("%m"),
-                                          'newsItems' : newsItems,})
+                                          'newsItems' : newsItems,
+                                          'articleitem' : articleitem,
+                                          'articleparagraphs' : articleparagraphs})
