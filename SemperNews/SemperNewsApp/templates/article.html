@@ -9,8 +9,11 @@ Hello World!
 {% block content %}
 <div id="mainarticle">
     <h1>{{ articleitem.title }}  </h1>
-
+    <h3 id="article_subtext"><em>by {{ articleitem.writer }}, written on {{ articleitem.updated_at }}</em></h3>
+<br/>
     <img src="{% static articleitem.thumbnail_path %}">
+    <br/>
+    <br/>
     {% for paragraph in articleparagraphs %}
         <p>{{ paragraph }}</p>
     {% endfor %}

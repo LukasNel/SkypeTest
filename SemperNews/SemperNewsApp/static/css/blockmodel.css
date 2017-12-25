@@ -6,25 +6,39 @@
     color: gold;
     font: bold 70px sabon;
 }
+button{
+    padding:5px;
+    min-width:7em;
+    background-color:lightblue;
+}
+button{
+    padding:5px;
+    min-width:7em;
+   
+}
 img{
     width:100%;
 }
 #main_header a:hover{
     text-decoration:none;
 }
+
 a{
     color:inherit;
     text-decoration:inherit;
+    
 }
 a:hover{
     color:inherit;
     text-decoration:inherit;
 }
 h1 {
-    font: bold 20px verdana,sans-serif
+    
+    font: bold 1.6em verdana,sans-serif;
+    font-size:1.6em;
 }
 h2 {
-    font: bold 14px verdana,sans-serif
+    font: bold 14px verdana,sans-serif;
 }
 header,section,footer,aside,nav,article,figure,figcaption,hgroup {
     display: block;
@@ -138,13 +152,33 @@ body {
     margin: auto;
 }
 #main_menu li {
+    
     display: inline-block;
     list-style: none;
     padding: 5px;
     font: bold 14px verdana,sans-serif;
-    
-}
 
+}
+#write_articlebodymenu{
+    list-style:none;
+    display:inline-block;
+    
+        background-color:lightcyan;
+        border-top: 1px #EEEEEE solid;
+        border-left: 1px #EEEEEE solid;
+        width:100%;
+        padding:3px;
+        box-shadow:2px 2px 0px 0px rgba(25,25,25,0.3); 
+
+}
+#write_articlebodymenu li{
+    list-style:none;
+    display:inline-block;
+    min-width:40px;
+}
+#write_articlebodymenu li button{
+    min-width:40px;
+}
 #newssummarylist{
     font-size:12px;
     margin-bottom:0px;
@@ -225,7 +259,17 @@ figcaption {
     font-weight:100;
 }
 #mainarticle{
-    margin-top:27px;
+    margin-top:0px;
+    font-size:1.5em;
+}
+#mainarticle h1{
+    margin-top:0px;
+    font-size:1.6em;
+    color: dark gray;
+}
+#article_subtext{
+    color:light gray;
+    font-size:0.9em;
 }
 #newssummary{
     margin-top: 27px;
@@ -360,3 +404,46 @@ figcaption {
   to {opacity: 1}
 }
 }
+
+.switch{
+        position:relative;
+        display:inline-block;
+        width:2em;
+        height:1.5em;
+        
+}
+.switch input{
+        display:none;
+        
+}
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background-color:#cccc;
+    -webkit-transition:.4s;
+    transition:.4s;
+    
+}
+.slider:before{
+    position:absolute;
+    content:"B";
+    height:1.2em;
+    width:1.2em;
+    background-color:white;
+    -webkit-transition:.4s;
+    transition:.4s;
+}
+input:checked + .slider {
+    background-color:#2196F3;
+}
+input:focus + .slider {
+    box-shadow:0 0 1px #2196F3;
+}
+input:focus + .slider {
+    box-shadow:0 0 1px #2196F3;
+}
+
