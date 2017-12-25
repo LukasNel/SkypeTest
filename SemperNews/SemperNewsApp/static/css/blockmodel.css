@@ -159,8 +159,29 @@ body {
     font: bold 14px verdana,sans-serif;
 
 }
+#write_articlebody{
+    font-size:1.5em;
+    
+}
+.intLink { cursor: pointer; }
+img.intLink { border: 0; }
+#toolBar1 select { font-size:10px; }
+#textBox {
+  width: 540px;
+  height: 200px;
+  border: 1px #000000 solid;
+  padding: 12px;
+  overflow: scroll;
+}
+#textBox #sourceText {
+  padding: 0;
+  margin: 0;
+  min-width: 498px;
+  min-height: 200px;
+}
+#editMode label { cursor: pointer; }
 #write_articlebodymenu{
-    list-style:none;
+    list-style:none;    
     display:inline-block;
     
         background-color:lightcyan;
@@ -173,11 +194,20 @@ body {
 }
 #write_articlebodymenu li{
     list-style:none;
+    position:relative;
+    top:0px;
     display:inline-block;
     min-width:40px;
 }
 #write_articlebodymenu li button{
     min-width:40px;
+}
+.write_editable{
+    border:black 1px dashed;
+    min-height:10em;
+    padding:10px;
+    margin-bottom:10px;
+    
 }
 #newssummarylist{
     font-size:12px;
@@ -340,6 +370,67 @@ figcaption {
   border-radius: 0 3px 3px 0;
 }
 
+.switch{
+        position:relative;
+        display:inline-block;
+        width:60px;
+        height:34px;
+}
+.switch input{
+        display:none;
+        
+}
+.slider{
+    position:absolute;
+    cursor:pointer;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    width:60px;
+    height:34px;
+    background-color:#cccc;
+    -webkit-transition:.4s; 
+    transition:.4s;
+}
+.slider:before{
+    position:absolute;
+    content:"";
+    text-align:center;
+    padding:3px;
+    border: 1px gray solid;
+    width:26px;
+    height:26px;
+    left: 4px;
+    bottom: 4px;
+    background-color:lightblue;
+    -webkit-transition:.4s;
+    transition:.4s;
+}
+#boldbox:before{
+       content:"B";
+        font-weight:bold;
+}
+#italicbox:before{
+       content:"I";
+        font-style:italic;
+}
+input:checked + .slider {
+    background-color:#2196F3;
+}
+input:checked + .slider:before {
+    transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+}
+input:focus + .slider {
+    box-shadow:0 0 1px #2196F3;
+}
+input:focus + .slider {
+    box-shadow:0 0 1px #2196F3;
+}
+
+
 /* Position the "next button" to the right */
 .next {
   right: 0;
@@ -404,46 +495,3 @@ figcaption {
   to {opacity: 1}
 }
 }
-
-.switch{
-        position:relative;
-        display:inline-block;
-        width:2em;
-        height:1.5em;
-        
-}
-.switch input{
-        display:none;
-        
-}
-.slider{
-    position:absolute;
-    cursor:pointer;
-    top: 0;
-    left: 0;
-    right:0;
-    bottom:0;
-    background-color:#cccc;
-    -webkit-transition:.4s;
-    transition:.4s;
-    
-}
-.slider:before{
-    position:absolute;
-    content:"B";
-    height:1.2em;
-    width:1.2em;
-    background-color:white;
-    -webkit-transition:.4s;
-    transition:.4s;
-}
-input:checked + .slider {
-    background-color:#2196F3;
-}
-input:focus + .slider {
-    box-shadow:0 0 1px #2196F3;
-}
-input:focus + .slider {
-    box-shadow:0 0 1px #2196F3;
-}
-

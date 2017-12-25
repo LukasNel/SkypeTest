@@ -59,7 +59,7 @@ def article(request,fid):
 
 
 def write(request):
-    newsItems = NewsItem.objects.order_by('-created_at')[:20]
+    newsItems = getCurrentNewsItems()
 
     return render(request, 'writearticle.html', {'currentDay' : timezone.now().strftime("%m"),
                                           'currentMonth' : timezone.now().strftime("%m"),
