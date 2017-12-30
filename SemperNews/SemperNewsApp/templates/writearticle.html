@@ -47,6 +47,10 @@ Hello World!
 
 
 
+
+
+
+
 </script>
 <script type="text/javascript">
         var oDoc, sDefTxt;
@@ -90,6 +94,10 @@ Hello World!
       oPrntWin.document.close();
     }
 
+
+
+
+
 </script>
 <style type="text/css">
     .intLink { cursor: pointer; }
@@ -117,59 +125,76 @@ Hello World!
 </div>
 <br/>
 <h1 style="margin-bottom:10px;">Title:</h1>
-
-<h1><span contenteditable="true" id="write_articleheader" class="write_editable"
-          style="padding-left:15px;padding-right:15px; ">My Sample Title</span></h1>
 <br/>
-
+<h1><span contenteditable="true" id="write_articleheader" class="write_editable form-control"
+          style="padding-left:15px;padding-right:15px;height:1.5em;">My Sample Title</span></h1>
+<br/>
+<hr>
 <h1 style="margin-bottom:2px;">Body:</h1>
+<br/>
 <input type="hidden" name="myDoc">
-<div id="toolBar1">
+<div id="toolBar1" class="form-group">
 
-    <select name = "menustuff" onchange="formatDoc('formatblock',this[this.selectedIndex].value);">
-        <option value="dd" selected>- formatting -</option>
-        <option value="h1">Title 1 &lt;h1&gt;</option>
-        <option value="h2">Title 2 &lt;h2&gt;</option>
-        <option value="h3">Title 3 &lt;h3&gt;</option>
-        <option value="h4">Title 4 &lt;h4&gt;</option>
-        <option value="h5">Title 5 &lt;h5&gt;</option>
-        <option value="h6">Subtitle &lt;h6&gt;</option>
-        <option value="p">Paragraph &lt;p&gt;</option>
-        <option value="pre">Preformatted &lt;pre&gt;</option>
-    </select>
-    <select onchange="formatDoc('fontname',this[this.selectedIndex].value);">
-        <option class="heading" selected>- font -</option>
-        <option>Arial</option>
-        <option>Arial Black</option>
-        <option>Courier New</option>
-        <option>Times New Roman</option>
-    </select>
-    <select onchange="formatDoc('fontsize',this[this.selectedIndex].value);">
-        <option class="heading" selected>- size -</option>
-        <option value="1">Very small</option>
-        <option value="2">A bit small</option>
-        <option value="3">Normal</option>
-        <option value="4">Medium-large</option>
-        <option value="5">Big</option>
-        <option value="6">Very big</option>
-        <option value="7">Maximum</option>
-    </select>
-    <select onchange="formatDoc('forecolor',this[this.selectedIndex].value);">
-        <option class="heading" selected>- color -</option>
-        <option value="red">Red</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="black">Black</option>
-    </select>
-    <select onchange="formatDoc('backcolor',this[this.selectedIndex].value);">
-        <option class="heading" selected>- background -</option>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="black">Black</option>
-    </select>
+        <div class="row" style = "font-size:1.5em;height:2em;">
+            <div class="col-md">
+                <select name="menustuff" onchange="formatDoc('formatblock',this[this.selectedIndex].value);"
+                        class="form-control">
+                    <option value="dd" selected>- formatting -</option>
+                    <option value="h1">Title 1 &lt;h1&gt;</option>
+                    <option value="h2">Title 2 &lt;h2&gt;</option>
+                    <option value="h3">Title 3 &lt;h3&gt;</option>
+                    <option value="h4">Title 4 &lt;h4&gt;</option>
+                    <option value="h5">Title 5 &lt;h5&gt;</option>
+                    <option value="h6">Subtitle &lt;h6&gt;</option>
+                    <option value="p">Paragraph &lt;p&gt;</option>
+                    <option value="pre">Preformatted &lt;pre&gt;</option>
+                </select>
+            </div>
+            <div class="col-md">
+                <select onchange="formatDoc('fontname',this[this.selectedIndex].value);" class="form-control">
+                    <option class="heading" selected>- font -</option>
+                    <option>Arial</option>
+                    <option>Arial Black</option>
+                    <option>Courier New</option>
+                    <option>Times New Roman</option>
+                </select>
+            </div>
+            <div class="col-md">
+                <select onchange="formatDoc('fontsize',this[this.selectedIndex].value);" class="form-control">
+                    <option class="heading" selected>- size -</option>
+                    <option value="1">Very small</option>
+                    <option value="2">A bit small</option>
+                    <option value="3">Normal</option>
+                    <option value="4">Medium-large</option>
+                    <option value="5">Big</option>
+                    <option value="6">Very big</option>
+                    <option value="7">Maximum</option>
+                </select>
+            </div>
+            <div class="col-md">
+                <select onchange="formatDoc('forecolor',this[this.selectedIndex].value);" class="form-control">
+                    <option class="heading" selected>- color -</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="black">Black</option>
+                </select>
+            </div>
+            <div class="col-md">
+                <select onchange="formatDoc('backcolor',this[this.selectedIndex].value);" class="form-control">
+                    <option class="heading" selected>- background -</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="black">Black</option>
+                </select>
+            </div>
+        </div>
+
 </div>
-<div id="toolBar2">
-    <img class="intLink" title="Clean" onclick="if(validateMode()&&confirm('Are you sure?')){oDoc.innerHTML=sDefTxt};"
+
+<div id="toolBar2" style="margin-top:4px;margin-bottom:4px;">
+    <img class="intLink" title="Clean"
+         onclick="if(validateMode()&&confirm('Are you sure?')){oDoc.innerHTML=sDefTxt};"
          src="data:image/gif;base64,R0lGODlhFgAWAIQbAD04KTRLYzFRjlldZl9vj1dusY14WYODhpWIbbSVFY6O7IOXw5qbms+wUbCztca0ccS4kdDQjdTLtMrL1O3YitHa7OPcsd/f4PfvrvDv8Pv5xv///////////////////yH5BAEKAB8ALAAAAAAWABYAAAV84CeOZGmeaKqubMteyzK547QoBcFWTm/jgsHq4rhMLoxFIehQQSAWR+Z4IAyaJ0kEgtFoLIzLwRE4oCQWrxoTOTAIhMCZ0tVgMBQKZHAYyFEWEV14eQ8IflhnEHmFDQkAiSkQCI2PDC4QBg+OAJc0ewadNCOgo6anqKkoIQA7"/>
     <img class="intLink" title="Print" onclick="printDoc();"
          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABGdBTUEAALGPC/xhBQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oEBxcZFmGboiwAAAAIdEVYdENvbW1lbnQA9syWvwAAAuFJREFUOMvtlUtsjFEUx//n3nn0YdpBh1abRpt4LFqtqkc3jRKkNEIsiIRIBBEhJJpKlIVo4m1RRMKKjQiRMJRUqUdKPT71qpIpiRKPaqdF55tv5vvusZjQTjOlseUkd3Xu/3dPzusC/22wtu2wRn+jG5So/OCDh8ycMJDflehMlkJkVK7KUYN+ufzA/RttH76zaVocDptRxzQtNi3mRWuPc+6cKtlXZ/sddP2uu9uXlmYXZ6Qm8v4Tz8lhF1H+zDQXt7S8oLMXtbF4e8QaFHjj3kbP2MzkktHpiTjp9VH6iHiA+whtAsX5brpwueMGdONdf/2A4M7ukDs1JW662+XkqTkeUoqjKtOjm2h53YFL15pSJ04Zc94wdtibr26fXlC2mzRvBccEbz2kiRFD414tKMlEZbVGT33+qCoHgha81SWYsew0r1uzfNylmtpx80pngQQ91LwVk2JGvGnfvZG6YcYRAT16GFtW5kKKfo1EQLtfh5Q2etT0BIWF+aitq4fDbk+ImYo1OxvGF03waFJQvBCkvDffRyEtxQiFFYgAZTHS0zwAGD7fG5TNnYNTp8/FzvGwJOfmgG7GOx0SAKKgQgDMgKBI0NJGMEImpGDk5+WACEwEd0ywblhGUZ4Hw5OdUekRBLT7DTgdEgxACsIznx8zpmWh7k4rkpJcuHDxCul6MDsmmBXDlWCH2+XozSgBnzsNCEE4euYV4pwCpsWYPW0UHDYBKSWu1NYjENDReqtKjwn2+zvtTc1vMSTB/mvev/WEYSlASsLimcOhOBJxw+N3aP/SjefNL5GePZmpu4kG7OPr1+tOfPyUu3BecWYKcwQcDFmwFKAUo90fhKDInBCAmvqnyMgqUEagQwCoHBDc1rjv9pIlD8IbVkz6qYViIBQGTJPx4k0XpIgEZoRN1Da0cij4VfR0ta3WvBXH/rjdCufv6R2zPgPH/e4pxSBCpeatqPrjNiso203/5s/zA171Mv8+w1LOAAAAAElFTkSuQmCC">
@@ -224,14 +249,15 @@ Hello World!
         </button>
     </li>
 </ul>-->
-<div id="write_articlebody" class="write_editable" contenteditable="true">
+<div id="write_articlebody" class="write_editable form-control" contenteditable="true">
 
 </div>
-<br>
-<div style="width:100%;border-bottom:black 1px solid;margin-bottom:10px;">
-</div>
-
+<hr>
 <button id="savebutton" onclick="postArticle()">Save</button>
+<br>
+<br>
+<!-- <div style="width:100%;border-bottom:black 1px solid;margin-bottom:10px;">
+</div>-->
 
 
 <!--

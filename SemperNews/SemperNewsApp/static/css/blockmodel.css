@@ -163,6 +163,7 @@ body {
     font-size:1.5em;
     margin-right:10px;
     padding-left:23px;
+        min-height:10em;
 }
 #write_articlebody ul{
     margin-left:20px;
@@ -206,9 +207,13 @@ img.intLink { border: 0; }
 #write_articlebodymenu li button{
     min-width:40px;
 }
+#write_articleheader{
+    font: bold 1.2em verdana,sans-serif;
+    min-height:2.7em;
+}
 .write_editable{
     border:black 1px dashed;
-    min-height:10em;
+
     padding:15px;
     margin-bottom:10px;
     
