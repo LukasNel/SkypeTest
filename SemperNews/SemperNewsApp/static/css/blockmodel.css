@@ -6,6 +6,7 @@
     color: gold;
     font: bold 70px sabon;
 }
+
 button{
     padding:5px;
     min-width:7em;
@@ -151,8 +152,7 @@ body {
     font: bold 14px verdana,sans-serif;
     margin: auto;
 }
-#main_menu li {
-    
+#main_menu li { 
     display: inline-block;
     list-style: none;
     padding: 5px;
@@ -163,6 +163,9 @@ body {
     font-size:1.5em;
     margin-right:10px;
     padding-left:23px;
+}
+#write_articlebody ul{
+    margin-left:20px;
 }
 .intLink { cursor: pointer; }
 img.intLink { border: 0; }
@@ -292,6 +295,9 @@ figcaption {
 #mainarticle{
     margin-top:0px;
     font-size:1.5em;
+}
+#mainarticle ul{
+    margin-left:20px;
 }
 #mainarticle h1{
     margin-top:0px;
