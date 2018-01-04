@@ -7,7 +7,7 @@ class WriterItem(models.Model):
     nickname = models.CharField(max_length=255,default='')
     title = models.CharField(max_length=255,default='Journalist')
     def __str__(self):              # __unicode__ on Python 2
-        return self.firstname + "  \"" + self.nickname + "\"  " + self.lastname
+        return self.firstname + "  \"" + self.nickname + "\"  " + self.lastname + ', ' + self.title
 
 class NewsItem(models.Model):
     title = models.CharField(max_length=255)

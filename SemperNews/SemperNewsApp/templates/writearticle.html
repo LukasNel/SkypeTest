@@ -5,6 +5,7 @@
 Hello World!
 {% endblock %}
 {% block scripts %}
+
 <script>
     // Created by STRd6
             // MIT License
@@ -64,10 +65,14 @@ Hello World!
                 });
               };
             })($);
+
+
 </script>
 <script>
             var input = document.getElementById('write_articlebody');
             var title = document.getElementById('write_articleheader');
+            var writer = document.getElementById('write_writerselect');
+            var alertobj = $('#write_alerts');
             var isbolded = false;
             var prevStr = '';
 
@@ -110,7 +115,6 @@ Hello World!
                 }
                 articlebody = commentstring + articlebody;
                 console.log(comments);
-                alert(articletitle);
                 //alert(articlebody);
                 $.ajax({
                     url: '/rest/articlesubmit/',
@@ -120,16 +124,16 @@ Hello World!
                         'type':"Editorial",
                         'article': input.innerHTML,
                         'image': imageDataURL,
-                        'writer':1,
+                        'writer':writer.value,
                     },
                     success: function (rawdata, message) {
-                        alert(message);
+                        properAlert('Success');
                          console.log(rawdata);
                     }
                 });
 
             }
-
+            imageDataURL = ""
             var imageDataURL = null;
             $("#write_articlebody").pasteImageReader(function(results) {
               document.execCommand("insertimage", 0, results.dataURL);
@@ -139,6 +143,12 @@ Hello World!
               imageDataURL = results.dataURL;
               $("#write_thumbnail").css("background-image","url(" + imageDataURL + ")");
             });
+
+            function properAlert(alertstr){
+                 falertstr = '' + alertstr;
+                alertobj.append('<div class="alert alert-success alert-dismissible" role="alert">' +
+                                  alertstr +'<button type="button" style="min-width:1em" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+            }
 
 
 
@@ -196,6 +206,8 @@ Hello World!
 
 
 
+
+
 </script>
 <style type="text/css">
     .intLink { cursor: pointer; }
@@ -233,15 +245,28 @@ Hello World!
 <div style="width:100%;border-bottom:black 1px solid;">
     <h1 style="margin-bottom:10px;">Write Article</h1>
 </div>
+
+
 <br/>
+
 <h1 style="margin-bottom:10px;">Title:</h1>
 <h1><span contenteditable="true" id="write_articleheader" class="write_editable form-control"
           style="padding-left:15px;padding-right:15px;height:1.5em;">My Sample Title</span></h1>
-<br/>
 <hr>
+
+<h1 style="margin-bottom:2px;">Writer:</h1>
+<select id="write_writerselect" class = "form-control">
+    {% for writer in writers %}
+    <option value="{{ writer.id }}" selected>{{ writer }}</option>
+    {% endfor %}
+</select>
+<hr>
+
 <h1 style="margin-bottom:2px;">Thumbnail:</h1>
 <div id="write_thumbnail" class="article_image write_editable form-control"></div>
 <hr>
+
+
 <h1 style="margin-bottom:2px;">Body:</h1>
 <input type="hidden" name="myDoc">
 <div id="toolBar1" class="form-group">
@@ -363,12 +388,16 @@ Hello World!
 </ul>-->
 
 <div id="write_articlebody" class="write_editable form-control" contenteditable="true">
-
 </div>
 <hr>
 <button id="savebutton" onclick="postArticle()">Save</button>
 <br>
+<br/>
+        <div id = "write_alerts"></div>
+
+
 <br>
+
 <!-- <div style="width:100%;border-bottom:black 1px solid;margin-bottom:10px;">
 </div>-->
 

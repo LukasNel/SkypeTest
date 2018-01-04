@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from SemperNewsApp.models import NewsItem
+from SemperNewsApp.models import WriterItem
 from SemperNewsApp.models import FeaturedItem
 from django.utils import timezone
 from math import floor
@@ -47,6 +48,7 @@ def getCurrentNewsItems():
 def article(request,fid):
     newsItems = getCurrentNewsItems()
 
+
     articleitem = NewsItem.objects.filter(pk=fid)[0]
     sanitizedarticle = articleitem.article
     articleparagraphs = sanitizedarticle.split('\n')
@@ -55,15 +57,17 @@ def article(request,fid):
                                           'currentYear' : timezone.now().strftime("%m"),
                                           'newsItems' : newsItems,
                                           'articleitem' : articleitem,
+
                                           'articlebody' :  articleitem.article.strip()})
 
 
 
 def write(request):
     newsItems = getCurrentNewsItems()
-
+    writers = WriterItem.objects.all()
     return render(request, 'writearticle.html', {'currentDay' : timezone.now().strftime("%m"),
                                           'currentMonth' : timezone.now().strftime("%m"),
                                           'currentYear' : timezone.now().strftime("%m"),
                                           'newsItems' : newsItems,
+                                          'writers' : writers,
                                           })

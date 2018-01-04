@@ -83,7 +83,7 @@ Hello World!
                     <div class="col-md-4">
                         {% with newsHeader=newsItems.0 %}
                         <a href="{% url 'article' newsHeader.id %}">
-                            <div id="newssummarycol1header">
+                            <div id="newssummarycol1header" style="margin-bottom:3px;">
                                 <div style="display:inline;height:10em;width:45%;float:left">
                                     <img src="{% static newsHeader.thumbnail_path %}"
                                          class="img-fluid img-thumbnail"
@@ -103,8 +103,8 @@ Hello World!
 
                             {% for newsItem in newsItems|slice:"1:5" %}
 
-                            <li style="display:block;">
-                                <a href="{% url 'article' newsItem.id %}">
+                            <li style="display:block;margin-bottom:3px;">
+                                <a href="{% url 'article' newsItem.id %}" style="">
                                     <div style="display:inline;height:6em;width:25%;float:left">
                                         <img src="{% static newsItem.thumbnail_path %}"
                                              class="img-fluid img-thumbnail"
