@@ -138,14 +138,7 @@ Hello World!
             var imageDataURL = null;
 
             if(isChrome){
-               $("#write_articlebody").pasteImageReader(function(results) {
-                    if(!((document.activeElement.id) === "write_articlebody")){
-                        thumbnail_function(results);
-                        return;
-                    }
-                    console.log(document.activeElement);
-                    document.execCommand("insertimage", 0, results.dataURL);
-            });
+              $("#write_thumbnail").attr('onfocus','inputer.focus();thumbnail.focus();');
 
             }
             thumbnail_function = function(results) {
@@ -275,7 +268,7 @@ Hello World!
 
 <h1 style="margin-bottom:2px;">Thumbnail:</h1>
 
-        <input type="checkbox" style="-webkit-appearance: none;-moz-appearance:none;appearance:none;background-color:white;" onfocus="inputer.focus();thumbnail.focus();" id="write_thumbnail" class="article_image write_editable form-control"/>
+        <input type="checkbox" style="-webkit-appearance: none;-moz-appearance:none;appearance:none;background-color:white;" onfocus="" id="write_thumbnail" class="article_image write_editable form-control"/>
 
 <hr>
 
