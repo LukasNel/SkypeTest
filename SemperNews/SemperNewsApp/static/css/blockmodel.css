@@ -181,6 +181,7 @@ body {
         box-shadow:2px 2px 0px 0px rgba(25,25,25,0.3); 
 
 }
+
 #write_articlebodymenu li{
     list-style:none;
     position:relative;
@@ -202,7 +203,9 @@ body {
     margin-bottom:10px;
     min-height:40em;
 }
-
+.thumbnail_active{
+    border: black 1px solid;
+}
 .article_image{
     min-height:30em;
     min-width:20em;

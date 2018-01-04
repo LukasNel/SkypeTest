@@ -36,7 +36,7 @@ Hello World!
                   var $this, element;
                   element = this;
                   $this = $(this);
-                  return $this.bind('paste', function(event) {
+                  return $this.on('paste', function(event) {
                     var clipboardData, found;
                     found = false;
                     clipboardData = event.clipboardData;
@@ -69,13 +69,14 @@ Hello World!
 
 </script>
 <script>
-            var input = document.getElementById('write_articlebody');
+            var inputer = document.getElementById('write_articlebody');
             var title = document.getElementById('write_articleheader');
             var writer = document.getElementById('write_writerselect');
+            var thumbnail = document.getElementById('write_thumbnail');
             var alertobj = $('#write_alerts');
             var isbolded = false;
             var prevStr = '';
-
+            var isChrome = !!window.chrome && !!window.chrome.webstore;
             function formatDoc(sCmd,sValue){
 
 
@@ -103,7 +104,7 @@ Hello World!
 
             function postArticle(){
                 var articletitle = title.textContent;
-                var articlebody = input.textContent;
+                var articlebody = inputer.textContent;
                 var comments = getAllComments(input);
                 var commentstring = '';
                 for(var i = 0;i < comments.length;i++){
@@ -122,7 +123,7 @@ Hello World!
                     data: {
                         'title': articletitle,
                         'type':"Editorial",
-                        'article': input.innerHTML,
+                        'article': inputer.innerHTML,
                         'image': imageDataURL,
                         'writer':writer.value,
                     },
@@ -135,22 +136,41 @@ Hello World!
             }
             imageDataURL = ""
             var imageDataURL = null;
+
+            if(isChrome){
+               $("#write_articlebody").pasteImageReader(function(results) {
+                    if(!((document.activeElement.id) === "write_articlebody")){
+                        thumbnail_function(results);
+                        return;
+                    }
+                    console.log(document.activeElement);
+                    document.execCommand("insertimage", 0, results.dataURL);
+            });
+
+            }
+            thumbnail_function = function(results) {
+                    imageDataURL = results.dataURL;
+                    $("#write_thumbnail").css("background-image","url(" + imageDataURL + ")");
+                }
+                $("#write_thumbnail").pasteImageReader(thumbnail_function);
+
             $("#write_articlebody").pasteImageReader(function(results) {
-              document.execCommand("insertimage", 0, results.dataURL);
+                if(!((document.activeElement.id) === "write_articlebody")){
+                    thumbnail_function(results);
+                    return;
+                }
+                console.log(document.activeElement);
+                 document.execCommand("insertimage", 0, results.dataURL);
             });
-
-            $("#write_thumbnail").pasteImageReader(function(results) {
-              imageDataURL = results.dataURL;
-              $("#write_thumbnail").css("background-image","url(" + imageDataURL + ")");
-            });
-
             function properAlert(alertstr){
                  falertstr = '' + alertstr;
                 alertobj.append('<div class="alert alert-success alert-dismissible" role="alert">' +
                                   alertstr +'<button type="button" style="min-width:1em" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
             }
-
-
+            function lightupThumbnail(){
+                var sty = $('#write_thumbnail');
+                sty.toggleClass('thumbnail_active');
+            }
 
 
 
@@ -199,15 +219,6 @@ Hello World!
       oPrntWin.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body onload=\"print();\">" + oDoc.innerHTML + "<\/body><\/html>");
       oPrntWin.document.close();
     }
-
-
-
-
-
-
-
-
-
 </script>
 <style type="text/css">
     .intLink { cursor: pointer; }
@@ -243,7 +254,7 @@ Hello World!
 {% endblock %}
 {% block content %}
 <div style="width:100%;border-bottom:black 1px solid;">
-    <h1 style="margin-bottom:10px;">Write Article</h1>
+    <h1 style="margin-bottom:10px;" id = "testy">Write Article</h1>
 </div>
 
 
@@ -263,7 +274,9 @@ Hello World!
 <hr>
 
 <h1 style="margin-bottom:2px;">Thumbnail:</h1>
-<div id="write_thumbnail" class="article_image write_editable form-control"></div>
+
+        <input type="checkbox" style="-webkit-appearance: none;-moz-appearance:none;appearance:none;background-color:white;" onfocus="inputer.focus();thumbnail.focus();" id="write_thumbnail" class="article_image write_editable form-control"/>
+
 <hr>
 
 
