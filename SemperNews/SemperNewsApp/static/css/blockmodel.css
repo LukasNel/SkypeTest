@@ -204,7 +204,7 @@ body {
 }
 
 .article_image{
-    min-height:40em;
+    min-height:30em;
     min-width:20em;
     max-width:100%;
     margin:auto;
@@ -273,7 +273,7 @@ figcaption {
     font: italic 14px sabon,sans-serif;
 }
 #slideshow_section{
-  max-width: 1000px;
+  max-width: 1030px;
   max-height: 700px;
   position: relative;
   margin: auto;

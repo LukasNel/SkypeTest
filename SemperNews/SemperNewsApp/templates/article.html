@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_articles.html" %}
 {% load static %}
 
 {% block title %}
@@ -7,16 +7,18 @@ Hello World!
 {% block scripts %}
 {% endblock %}
 {% block content %}
+
 <div id="mainarticle">
-    <h1>{{ articleitem.title }}  </h1>
+    <h1>{{ articleitem.title }} </h1>
+
     <h3 id="article_subtext"><em>by {{ articleitem.writer }}, written on {{ articleitem.updated_at }}</em></h3>
-<hr>
-    <div style="background-image:url({% static articleitem.thumbnail_path %})" class = "article_image"></div>
-   <hr>
-    <div id = "mainarticlebody">
+    <hr>
+    <div style="background-image:url({% static articleitem.thumbnail_path %})" class="article_image"></div>
+    <hr>
+    <div id="mainarticlebody">
         {% autoescape off %}
 
-            {{ articlebody }}
+        {{ articlebody }}
 
         {% endautoescape %}
     </div>
