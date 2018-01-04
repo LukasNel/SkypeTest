@@ -163,28 +163,12 @@ body {
     font-size:1.5em;
     margin-right:10px;
     padding-left:23px;
-        min-height:10em;
 }
+        min-height:10em;
 #write_articlebody ul{
     margin-left:20px;
 }
-.intLink { cursor: pointer; }
-img.intLink { border: 0; }
-#toolBar1 select { font-size:10px; }
-#textBox {
-  width: 540px;
-  height: 200px;
-  border: 1px #000000 solid;
-  padding: 12px;
-  overflow: scroll;
-}
-#textBox #sourceText {
-  padding: 0;
-  margin: 0;
-  min-width: 498px;
-  min-height: 200px;
-}
-#editMode label { cursor: pointer; }
+
 #write_articlebodymenu{
     list-style:none;    
     display:inline-block;
@@ -208,15 +192,24 @@ img.intLink { border: 0; }
     min-width:40px;
 }
 #write_articleheader{
-    font: bold 1.2em verdana,sans-serif;
-    min-height:2.7em;
+    font: bold 1.6em verdana,sans-serif;
+    min-height:2.4em;
 }
-.write_editable{
+.write_editable{    
     border:black 1px dashed;
-
+    height:auto;
     padding:15px;
     margin-bottom:10px;
-    
+    min-height:40em;
+}
+
+.article_image{
+    min-height:40em;
+    min-width:20em;
+    max-width:100%;
+    margin:auto;
+    background-size: cover;
+    object-fit: cover;
 }
 #newssummarylist{
     font-size:12px;
@@ -302,7 +295,10 @@ figcaption {
     font-size:1.5em;
 }
 #mainarticle ul{
-    margin-left:20px;
+    margin-left:26px;
+}
+span[style="mso-list:Ignore"]{
+        margin-left:26px;
 }
 #mainarticle h1{
     margin-top:0px;

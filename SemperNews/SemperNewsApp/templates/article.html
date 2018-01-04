@@ -10,16 +10,16 @@ Hello World!
 <div id="mainarticle">
     <h1>{{ articleitem.title }}  </h1>
     <h3 id="article_subtext"><em>by {{ articleitem.writer }}, written on {{ articleitem.updated_at }}</em></h3>
-<br/>
-    <img src="{% static articleitem.thumbnail_path %}">
-    <br/>
-    <br/>
+<hr>
+    <div style="background-image:url({% static articleitem.thumbnail_path %})" class = "article_image"></div>
+   <hr>
+    <div id = "mainarticlebody">
+        {% autoescape off %}
 
-    {% autoescape off %}
-    {% for paragraph in articleparagraphs %}
-        <p>{{ paragraph }}</p>
-    {% endfor %}
-    {% endautoescape %}
+            {{ articlebody }}
+
+        {% endautoescape %}
+    </div>
 </div>
 <!--
 <section id = "main_section">

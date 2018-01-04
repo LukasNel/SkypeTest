@@ -6,6 +6,66 @@ Hello World!
 {% endblock %}
 {% block scripts %}
 <script>
+    // Created by STRd6
+            // MIT License
+            // jquery.paste_image_reader.js
+            (function($) {
+              var defaults;
+              $.event.fix = (function(originalFix) {
+                return function(event) {
+                  event = originalFix.apply(this, arguments);
+                  if (event.type.indexOf('copy') === 0 || event.type.indexOf('paste') === 0) {
+                    event.clipboardData = event.originalEvent.clipboardData;
+                  }
+                  return event;
+                };
+              })($.event.fix);
+              defaults = {
+                callback: $.noop,
+                matchType: /image.*/
+              };
+              return $.fn.pasteImageReader = function(options) {
+                if (typeof options === "function") {
+                  options = {
+                    callback: options
+                  };
+                }
+                options = $.extend({}, defaults, options);
+                return this.each(function() {
+                  var $this, element;
+                  element = this;
+                  $this = $(this);
+                  return $this.bind('paste', function(event) {
+                    var clipboardData, found;
+                    found = false;
+                    clipboardData = event.clipboardData;
+                    return Array.prototype.forEach.call(clipboardData.types, function(type, i) {
+                      var file, reader;
+                      if (found) {
+                        return;
+                      }
+                      if (type.match(options.matchType) || clipboardData.items[i].type.match(options.matchType)) {
+                        file = clipboardData.items[i].getAsFile();
+                        reader = new FileReader();
+                        reader.onload = function(evt) {
+                          return options.callback.call(element, {
+                            dataURL: evt.target.result,
+                            event: evt,
+                            file: file,
+                            name: file.name
+                          });
+                        };
+                        reader.readAsDataURL(file);
+
+                        return found = true;
+                      }
+                    });
+                  });
+                });
+              };
+            })($);
+</script>
+<script>
             var input = document.getElementById('write_articlebody');
             var title = document.getElementById('write_articleheader');
             var isbolded = false;
@@ -20,11 +80,38 @@ Hello World!
             function bold(){
 
             }
+            function filterNone() {
+                return NodeFilter.FILTER_ACCEPT;
+            }
+
+            function getAllComments(rootElem) {
+                var comments = [];
+
+                // Fourth argument, which is actually obsolete according to the DOM4 standard, is required in IE 11
+                var iterator = document.createNodeIterator(rootElem, NodeFilter.SHOW_COMMENT, filterNone, false);
+                var curNode;
+                while (curNode = iterator.nextNode()) {
+                    comments.push(curNode.nodeValue);
+                }
+                return comments;
+            }
 
             function postArticle(){
-                var articletitle = $('#write_articleheader').text();
-                var articlebody = $('#write_articlebody').text();
-
+                var articletitle = title.textContent;
+                var articlebody = input.textContent;
+                var comments = getAllComments(input);
+                var commentstring = '';
+                for(var i = 0;i < comments.length;i++){
+                    commentstring += '<!--' + comments[i] + '-->';
+                }
+                if(imageDataURL === null) {
+                    alert("You need to insert an image.");
+                    return;
+                }
+                articlebody = commentstring + articlebody;
+                console.log(comments);
+                alert(articletitle);
+                //alert(articlebody);
                 $.ajax({
                     url: '/rest/articlesubmit/',
                     method: 'POST',
@@ -32,17 +119,26 @@ Hello World!
                         'title': articletitle,
                         'type':"Editorial",
                         'article': input.innerHTML,
-                        'thumbnail_path': "img1.jpg",
+                        'image': imageDataURL,
                         'writer':1,
                     },
                     success: function (rawdata, message) {
-                        alert(rawdata);
                         alert(message);
+                         console.log(rawdata);
                     }
                 });
 
             }
 
+            var imageDataURL = null;
+            $("#write_articlebody").pasteImageReader(function(results) {
+              document.execCommand("insertimage", 0, results.dataURL);
+            });
+
+            $("#write_thumbnail").pasteImageReader(function(results) {
+              imageDataURL = results.dataURL;
+              $("#write_thumbnail").css("background-image","url(" + imageDataURL + ")");
+            });
 
 
 
@@ -98,17 +194,31 @@ Hello World!
 
 
 
+
+
 </script>
 <style type="text/css">
     .intLink { cursor: pointer; }
     img.intLink { border: 0; width:2em;height:2em; }
-    #toolBar1 select { font-size:10px; }
+    #toolBar1 select {
+    font-size:0.55em;
+    height:3em;
+
+    }
     #textBox {
+    margin:0;
+    padding:0;
     width: 540px;
     height: 200px;
     border: 1px #000000 solid;
     padding: 12px;
     overflow: scroll;
+    }
+    #toolBar1{
+    margin-bottom:0px;
+    }
+    #toolBar2{
+    margin-bottom:5px;
     }
     #textBox #sourceText {
     padding: 0;
@@ -125,74 +235,76 @@ Hello World!
 </div>
 <br/>
 <h1 style="margin-bottom:10px;">Title:</h1>
-<br/>
 <h1><span contenteditable="true" id="write_articleheader" class="write_editable form-control"
           style="padding-left:15px;padding-right:15px;height:1.5em;">My Sample Title</span></h1>
 <br/>
 <hr>
+<h1 style="margin-bottom:2px;">Thumbnail:</h1>
+<div id="write_thumbnail" class="article_image write_editable form-control"></div>
+<hr>
 <h1 style="margin-bottom:2px;">Body:</h1>
-<br/>
 <input type="hidden" name="myDoc">
 <div id="toolBar1" class="form-group">
 
-        <div class="row" style = "font-size:1.5em;height:2em;">
-            <div class="col-md">
-                <select name="menustuff" onchange="formatDoc('formatblock',this[this.selectedIndex].value);"
-                        class="form-control">
-                    <option value="dd" selected>- formatting -</option>
-                    <option value="h1">Title 1 &lt;h1&gt;</option>
-                    <option value="h2">Title 2 &lt;h2&gt;</option>
-                    <option value="h3">Title 3 &lt;h3&gt;</option>
-                    <option value="h4">Title 4 &lt;h4&gt;</option>
-                    <option value="h5">Title 5 &lt;h5&gt;</option>
-                    <option value="h6">Subtitle &lt;h6&gt;</option>
-                    <option value="p">Paragraph &lt;p&gt;</option>
-                    <option value="pre">Preformatted &lt;pre&gt;</option>
-                </select>
-            </div>
-            <div class="col-md">
-                <select onchange="formatDoc('fontname',this[this.selectedIndex].value);" class="form-control">
-                    <option class="heading" selected>- font -</option>
-                    <option>Arial</option>
-                    <option>Arial Black</option>
-                    <option>Courier New</option>
-                    <option>Times New Roman</option>
-                </select>
-            </div>
-            <div class="col-md">
-                <select onchange="formatDoc('fontsize',this[this.selectedIndex].value);" class="form-control">
-                    <option class="heading" selected>- size -</option>
-                    <option value="1">Very small</option>
-                    <option value="2">A bit small</option>
-                    <option value="3">Normal</option>
-                    <option value="4">Medium-large</option>
-                    <option value="5">Big</option>
-                    <option value="6">Very big</option>
-                    <option value="7">Maximum</option>
-                </select>
-            </div>
-            <div class="col-md">
-                <select onchange="formatDoc('forecolor',this[this.selectedIndex].value);" class="form-control">
-                    <option class="heading" selected>- color -</option>
-                    <option value="red">Red</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
-                    <option value="black">Black</option>
-                </select>
-            </div>
-            <div class="col-md">
-                <select onchange="formatDoc('backcolor',this[this.selectedIndex].value);" class="form-control">
-                    <option class="heading" selected>- background -</option>
-                    <option value="red">Red</option>
-                    <option value="green">Green</option>
-                    <option value="black">Black</option>
-                </select>
-            </div>
+    <div class="row" style="font-size:1.5em;height:2em;">
+        <div class="col-md">
+            <select name="menustuff" onchange="formatDoc('formatblock',this[this.selectedIndex].value);"
+                    class="form-control">
+                <option value="dd" selected>- formatting -</option>
+                <option value="h1">Title 1 &lt;h1&gt;</option>
+                <option value="h2">Title 2 &lt;h2&gt;</option>
+                <option value="h3">Title 3 &lt;h3&gt;</option>
+                <option value="h4">Title 4 &lt;h4&gt;</option>
+                <option value="h5">Title 5 &lt;h5&gt;</option>
+                <option value="h6">Subtitle &lt;h6&gt;</option>
+                <option value="p">Paragraph &lt;p&gt;</option>
+                <option value="pre">Preformatted &lt;pre&gt;</option>
+            </select>
         </div>
+        <div class="col-md">
+            <select onchange="formatDoc('fontname',this[this.selectedIndex].value);"
+                    class="form-control form-control-lg">
+                <option class="heading" selected>- font -</option>
+                <option>Arial</option>
+                <option>Arial Black</option>
+                <option>Courier New</option>
+                <option>Times New Roman</option>
+            </select>
+        </div>
+        <div class="col-md">
+            <select onchange="formatDoc('fontsize',this[this.selectedIndex].value);" class="form-control">
+                <option class="heading" selected>- size -</option>
+                <option value="1">Very small</option>
+                <option value="2">A bit small</option>
+                <option value="3">Normal</option>
+                <option value="4">Medium-large</option>
+                <option value="5">Big</option>
+                <option value="6">Very big</option>
+                <option value="7">Maximum</option>
+            </select>
+        </div>
+        <div class="col-md">
+            <select onchange="formatDoc('forecolor',this[this.selectedIndex].value);" class="form-control">
+                <option class="heading" selected>- color -</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="black">Black</option>
+            </select>
+        </div>
+        <div class="col-md">
+            <select onchange="formatDoc('backcolor',this[this.selectedIndex].value);" class="form-control">
+                <option class="heading" selected>- background -</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="black">Black</option>
+            </select>
+        </div>
+    </div>
 
 </div>
 
-<div id="toolBar2" style="margin-top:4px;margin-bottom:4px;">
+<div id="toolBar2" style="">
     <img class="intLink" title="Clean"
          onclick="if(validateMode()&&confirm('Are you sure?')){oDoc.innerHTML=sDefTxt};"
          src="data:image/gif;base64,R0lGODlhFgAWAIQbAD04KTRLYzFRjlldZl9vj1dusY14WYODhpWIbbSVFY6O7IOXw5qbms+wUbCztca0ccS4kdDQjdTLtMrL1O3YitHa7OPcsd/f4PfvrvDv8Pv5xv///////////////////yH5BAEKAB8ALAAAAAAWABYAAAV84CeOZGmeaKqubMteyzK547QoBcFWTm/jgsHq4rhMLoxFIehQQSAWR+Z4IAyaJ0kEgtFoLIzLwRE4oCQWrxoTOTAIhMCZ0tVgMBQKZHAYyFEWEV14eQ8IflhnEHmFDQkAiSkQCI2PDC4QBg+OAJc0ewadNCOgo6anqKkoIQA7"/>
@@ -249,6 +361,7 @@ Hello World!
         </button>
     </li>
 </ul>-->
+
 <div id="write_articlebody" class="write_editable form-control" contenteditable="true">
 
 </div>

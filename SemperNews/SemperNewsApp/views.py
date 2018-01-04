@@ -48,14 +48,14 @@ def article(request,fid):
     newsItems = getCurrentNewsItems()
 
     articleitem = NewsItem.objects.filter(pk=fid)[0]
-    sanitizedarticle = articleitem.article.replace('&lt;', '<').replace('&gt;', '>')
+    sanitizedarticle = articleitem.article
     articleparagraphs = sanitizedarticle.split('\n')
     return render(request, 'article.html', {'currentDay' : timezone.now().strftime("%m"),
                                           'currentMonth' : timezone.now().strftime("%m"),
                                           'currentYear' : timezone.now().strftime("%m"),
                                           'newsItems' : newsItems,
                                           'articleitem' : articleitem,
-                                          'articleparagraphs' : articleparagraphs})
+                                          'articlebody' :  articleitem.article.strip()})
 
 
 
