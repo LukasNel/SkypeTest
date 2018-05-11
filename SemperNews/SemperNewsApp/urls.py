@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^articles/([0-9]+)/$', views.article,name='article'),
     url(r'^write/$', views.write,name='write'),
     url(r'^rest/', include(router.urls, namespace='rest')),
+    url(r'^getarticletitles/([0-9]+)/([0-9]+)/([0-9]+)/$',  views.getarticletitles, name='getarticletitle'),
 ]

@@ -1,0 +1,62 @@
+{% load static %}
+<div class="row">
+                    <div class="col-md-4">
+                        <ul id="newssummarycol1" style="list-style:none;display:block;">
+
+                            {% for newsItem in newsItems|slice:"0:5" %}
+
+                            <li style="display:block;margin-bottom:3px;">
+                                <a href="{% url 'article' newsItem.id %}" style="">
+                                    <div style="display:inline;height:6em;width:25%;float:left">
+                                        <img src="{% static newsItem.thumbnail_path %}"
+                                             class="img-fluid img-thumbnail"
+                                             style="height: 100%; width: 100%;"/>
+                                    </div>
+                                    <div style="display:inline;width:70%;margin-left:5px;float:left">
+                                        <b>&rarr; {{ newsItem.title }} </b>
+                                        <em>Posted {{ newsItem.timeDiff }} ago. </em>
+                                    </div>
+                                    <br style="clear:both;"/>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        {% with featuredItem=featuredItems.0 %}
+                        <a href="{% url 'article' featuredItem.newsItem.id %}">
+                            <div class="newssummarylistitem" style = "border-top:none;">
+
+                                <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
+                                    <img src="{% static featuredItem.thumbnail_path %}" class="img-fluid img-thumbnail"
+                                         style="height: 100%; width: 100%;"/>
+                                </div>
+                                <span>{{ featuredItem.newsItem.type | upper }}</span><br/>
+                                <b style="font-size:14px">{{ featuredItem.newsItem.title }}</b><br/>
+                                <em style="font-weight:bold">{{ featuredItem.subtext }} </em><br/>
+
+
+                            </div>
+                        </a>
+                        {% endwith %}
+                    </div>
+                    <div class="col-md-4">
+                        {% with featuredItem=featuredItems.1 %}
+                        <a href="{% url 'article' featuredItem.newsItem.id %}">
+                            <div class="newssummarylistitem">
+
+                                <div style="display:block;height:21em;width:100%;font-size:13px;margin-bottom:2px;">
+                                    <img src="{% static featuredItem.thumbnail_path %}" class="img-fluid img-thumbnail"
+                                         style="height: 100%; width: 100%;"/>
+                                </div>
+                                <span>{{ featuredItem.newsItem.type | upper }}</span><br/>
+                                <b style="font-size:14px">{{ featuredItem.newsItem.title }}</b><br/>
+                                <em style="font-weight:bold">{{ featuredItem.subtext }} </em><br/>
+
+
+                            </div>
+                        </a>
+                        {% endwith %}
+
+                    </div>
+                </div>
