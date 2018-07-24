@@ -73,6 +73,7 @@ Hello World!
             var title = document.getElementById('write_articleheader');
             var writer = document.getElementById('write_writerselect');
             var thumbnail = document.getElementById('write_thumbnail');
+            var success_button = document.getElementById('savebutton');
             var alertobj = $('#write_alerts');
             var isbolded = false;
             var prevStr = '';
@@ -86,6 +87,24 @@ Hello World!
             function bold(){
 
             }
+			function readFile() {
+  
+			  if (this.files && this.files[0]) {
+				
+				var FR= new FileReader();
+				
+				FR.addEventListener("load", function(e) {
+				  $("#write_thumbnail").css("background-image","url(" + e.target.result + ")");
+				  imageDataURL = e.target.result;
+				  //document.getElementById("img").src       = e.target.result;
+				  //document.getElementById("b64").innerHTML = e.target.result;
+				}); 
+				
+				FR.readAsDataURL( this.files[0] );
+			  }
+			  
+			}
+			document.getElementById("pic_upload").addEventListener("change", readFile);
             function filterNone() {
                 return NodeFilter.FILTER_ACCEPT;
             }
@@ -106,6 +125,7 @@ Hello World!
                 var articletitle = title.textContent;
                 var articlebody = inputer.textContent;
                 var comments = getAllComments(inputer);
+				
                 var commentstring = '';
                 for(var i = 0;i < comments.length;i++){
                     commentstring += '<!--' + comments[i] + '-->';
@@ -117,6 +137,7 @@ Hello World!
                 articlebody = commentstring + articlebody;
                 console.log(comments);
                 //alert(articlebody);
+				
                 $.ajax({
                     url: '/rest/articlesubmit/',
                     method: 'POST',
@@ -130,8 +151,14 @@ Hello World!
                     success: function (rawdata, message) {
                         properAlert('Success');
                          console.log(rawdata);
-                    }
+						 success_button.disabled = false;
+                    },
+					error: function(raw,msg,error){
+						properAlert('Error:Didn\'t manage to send.');
+						success_button.disabled = false;
+					}
                 });
+				success_button.disabled = true;
 
             }
             imageDataURL = ""
@@ -267,11 +294,9 @@ Hello World!
 <hr>
 
 <h1 style="margin-bottom:2px;">Thumbnail:</h1>
-
-        <input type="checkbox" style="-webkit-appearance: none;-moz-appearance:none;appearance:none;background-color:white;" onfocus="" id="write_thumbnail" class="article_image write_editable form-control"/>
-
+        <input type="checkbox" style="-webkit-appearance: none;-moz-appearance:none;appearance:none;background-color:white;" onfocus="" id="write_thumbnail" class="article_image write_editable form-control"><img id = "img"/></input>
+		<input type = "file" id = "pic_upload">
 <hr>
-
 
 <h1 style="margin-bottom:2px;">Body:</h1>
 <input type="hidden" name="myDoc">
